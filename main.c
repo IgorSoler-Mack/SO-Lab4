@@ -1,8 +1,8 @@
-#include <stdio.h>		// Header de Entrada e Saída, como printf
+#include <stdio.h>		// Definições de Entrada e Saída, como printf
 #include <sys/types.h>		// Definições de tipos de dados, como pid_t
 #include <unistd.h>		// Define funções como pipe() e fork()
-#include <sys/wait.h>		// Define funções de espera como wait()
-#include <stdlib.h>		// Define funções gerais como exit()
+#include <sys/wait.h>		// Define funções de espera, como wait()
+#include <stdlib.h>		// Define funções gerais, como exit()
 
 int value = 5;
 
