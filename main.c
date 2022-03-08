@@ -1,8 +1,8 @@
-#include <stdio.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <stdlib.h>
+#include <stdio.h>		// Header de Entrada e Saída, como printf
+#include <sys/types.h>		// Definições de tipos de dados, como pid_t
+#include <unistd.h>		// Define funções como pipe() e fork()
+#include <sys/wait.h>		// Define funções de espera como wait()
+#include <stdlib.h>		// Define funções gerais como exit()
 
 int value = 5;
 
@@ -13,15 +13,23 @@ int main(){
 	pid_t pid;
 
 	pipe_status = pipe(pip);
+	if (pipe_status == -1){ // Checa se algum erro ocorreu com o pipe()
+		perror("Erro ao definir Pipe");
+		exit(1);
+	}
 	
-	pid = fork(); // Divide o processo 2, um Processo Pai e outro Filho
+	pid = fork(); // Bifurca o processo
 	
-	if (pid == 0) { // Processo Filho
-		printf("Entrei no filho!\n");
+	if (pid == -1) { // Checa se algum erro ocorreu com o fork()
+		perror("Erro ao dividir processo");
+		exit(1);
+	}
+	else if (pid == 0) { // Processo Filho
+		printf("Entrei no filho!\n\n");
 		
 		value += 15;
 		
-		printf ("CHILD: value = %d\n",value);
+		printf ("CHILD \tvalue = %d\n",value);
 		
 		// Escreve o valor de value no pipe, para que o Parent possa ler
 		write(pip[1], &value, 1);  
@@ -33,9 +41,8 @@ int main(){
 		
 		// Lê o valor de value do pipe, escrito pelo processo Child
 		read(pip[0], &value, sizeof(int)); 
-
 		
-		printf("PARENT: value = %d\n",value);
+		printf("PARENT\tvalue = %d\n",value);
 		return 0;
 	}
 }
