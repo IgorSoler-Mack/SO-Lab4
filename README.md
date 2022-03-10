@@ -1,5 +1,5 @@
 # SO Lab 4: Pipes
-Lab 3 de Sistemas operacionais
+Lab 4 de Sistemas operacionais
 
 ## Grupo
 Igor Soler Cavalcanti - 42013550
