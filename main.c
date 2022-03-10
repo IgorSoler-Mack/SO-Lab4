@@ -38,7 +38,7 @@ int main(){
 		return 0;
 	}
 	else if (pid > 0) { // Processo Pai
-		wait(NULL);
+		wait(NULL); // Espera até que o processo Filho tenha terminado
 		close(pip[1]); // Fecha o input do pipe
 		
 		// Lê o valor de value do pipe, escrito pelo processo Child
