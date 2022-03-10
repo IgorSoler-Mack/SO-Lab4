@@ -26,6 +26,7 @@ int main(){
 	}
 	else if (pid == 0) { // Processo Filho
 		printf("Entrei no filho!\n\n");
+		close(pip[0]); // Fecha o output do pipe
 		
 		value += 15;
 		
@@ -38,6 +39,7 @@ int main(){
 	}
 	else if (pid > 0) { // Processo Pai
 		wait(NULL);
+		close(pip[1]); // Fecha o input do pipe
 		
 		// Lê o valor de value do pipe, escrito pelo processo Child
 		read(pip[0], &value, sizeof(int)); 
